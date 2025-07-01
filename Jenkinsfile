@@ -11,7 +11,7 @@ pipeline {
     stage('Build Docker Image') {
         steps {
             script {
-                dockerImage = sh 'docker build -t diabetes-app .'
+                sh 'docker build -t diabetes-app .'
             }
         }
     }
