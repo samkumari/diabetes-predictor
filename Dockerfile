@@ -1,10 +1,14 @@
-FROM python:3.9
+FROM python:3.9-slim
 
 WORKDIR /app
-COPY . .
-RUN pip install -r requirements.txt
 
-EXPOSE 5000
-CMD ["sh", "-c", "python train_model.py && python app.py"]
-COPY train_model.py .
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Build the model inside the Docker image
 RUN python train_model.py
+
+CMD ["python", "app.py"]
+
